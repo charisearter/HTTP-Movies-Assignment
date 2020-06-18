@@ -20,9 +20,10 @@ const UpdateMovieForm = (props) => {
   
     useEffect(() => {
       axios
-        .get(`http://localhost:5001/api/movies/${id}`)
+        .get(`http://localhost:5000/api/movies/${id}`)
         .then((res) => {
           console.log(res);
+          res.data.stars = res.data.stars.join(',')
           setMovieValues(res.data);
         })
         .catch((err) => {
@@ -42,14 +43,17 @@ const UpdateMovieForm = (props) => {
   
     const onSubmit = (e) => {
       e.preventDefault();
-  
+    movieValues.stars = movieValues.stars.split(','); //splits at comma, returns stars as array
+    console.log(movieValues.stars)
       axios
-        .put(`http://localhost:5001/api/movies/${id}`, movieValues)
+        .put(`http://localhost:5000/api/movies/${id}`, movieValues)
         .then((res) => {
           console.log(res);
           setMovieValues(initialValues);
+          props.getMovieList();
           push("/");
           props.setRefresh(true);
+      
         })
         .catch((err) => {
           console.log(err);

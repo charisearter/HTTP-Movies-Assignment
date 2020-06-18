@@ -31,6 +31,7 @@ const App = () => {
 
   return (
     <Fragment>
+      
       <SavedList list={savedList} /> 
 
       <Route exact path="/">
@@ -40,10 +41,11 @@ const App = () => {
       <Route path="/movies/:id">
         <Movie addToSavedList={addToSavedList} />
       </Route>
-
+      
       <Route path="/update-movies/:id">
-        <UpdateMovieForm setMovieList={setMovieList} setRefresh={setRefresh} />
+        <UpdateMovieForm setMovieList={setMovieList} getMovieList={getMovieList}  setRefresh={setRefresh} />
       </Route>
+      
     </Fragment>
   );
 };
