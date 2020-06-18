@@ -27,7 +27,7 @@ const App = () => {
 
   useEffect(() => {
     getMovieList();
-  }, []);
+  }, [refresh]);
 
   return (
     <>

@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
-import Axios from 'axios';
+import axios from 'axios';
 
 const initialValues = {
-
     id:'',
     title:'',
     director:'',
@@ -12,77 +11,91 @@ const initialValues = {
   
 };
 
-//add stars function to add actors/actresses
-addStars = () => {
-  const { stars } = this.state;
-  stars.push(this.state.actor);
-  this.setState({ actor: '', stars })
-};
-
-//input Change function for input form
-inputChange = e => {
-  console.log(e.target.value);
-  this.setState({ [e.target.name]: e.target.value })
-};
-
-// addMovie = () => {
-//   const { stars, title, metaScore, director } = this.state;
-//   const newMovie= { stars, title, metaScore, director };
-//   const saveMovie = axios
-//   .post('http://localhost:/api/movies', newMovie)
-//   .then(res => {
-//     this.props.history.push('/')
-//   })
-//   .catch(err => {
-//     console.log(err.response.message)
-//   })
-// }
 const UpdateMovieForm = (props) => {
 
+  const { push } = useHistory();
+  const { id } = useParams();
+  const [movieValues, setMovieValues] = useState(initialValues);
 
-
-  return(
-    <div>
-      <input 
-        type='text' 
-        placeholder='Movie Title' 
-        value={this.state.title}
-        onChange={this.inputChange}
-        name='title'  
-      />
-
-<input 
-        type='text' 
-        placeholder='Director' 
-        value={this.state.director}
-        onChange={this.inputChange}
-        name='director'  
-      />
-
-<input 
-        type='text' 
-        placeholder='Meta Score' 
-        value={this.state.metaScore}
-        onChange={this.inputChange}
-        name='metaScore'  
-      />
-
-<input 
-        type='text' 
-        placeholder='Add actor(s)/ actress(es)' 
-        value={this.state.actor}
-        onChange={this.inputChange}
-        name='actor'  
-      />
-
-      <button onClick={this.addStars}> Add Actor / Actress to List </button>
-      {/* <button onClick={this.addMovie}> Save Movie </button> */}
-      {this.state.stars.map(actor => {
-        return <div> {actor} </div>; 
-      })}
-      
-    </div>
-  )
-}
-
-export default UpdateMovieForm;
+  
+    useEffect(() => {
+      axios
+        .get(`http://localhost:5001/api/movies/${id}`)
+        .then((res) => {
+          console.log(res);
+          setMovieValues(res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }, []);
+  
+    const onChange = (e) => {
+      let name = e.target.name;
+      let value = e.target.value;
+  
+      setMovieValues({
+        ...movieValues,
+        [name]: value,
+      });
+    };
+  
+    const onSubmit = (e) => {
+      e.preventDefault();
+  
+      axios
+        .put(`http://localhost:5001/api/movies/${id}`, movieValues)
+        .then((res) => {
+          console.log(res);
+          setMovieValues(initialValues);
+          push("/");
+          props.setRefresh(true);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    };
+  
+    return (
+      <div>
+        <h2>Update Item</h2>
+        <form onSubmit={onSubmit}>
+          <input
+            type='text'
+            name='title'
+            onChange={onChange}
+            placeholder='title'
+            value={movieValues.title}
+          />
+  
+          <input
+            type='text'
+            name='director'
+            onChange={onChange}
+            placeholder='director'
+            value={movieValues.director}
+          />
+  
+          <input
+            type='text'
+            name='metascore'
+            onChange={onChange}
+            placeholder='metascore'
+            value={movieValues.metascore}
+          />
+  
+          <input
+            type='text'
+            name='stars'
+            onChange={onChange}
+            placeholder='stars'
+            value={movieValues.stars}
+          />
+  
+          <button>Update Movie</button>
+        </form>
+      </div>
+    );
+  };
+  
+  export default UpdateMovieForm;
