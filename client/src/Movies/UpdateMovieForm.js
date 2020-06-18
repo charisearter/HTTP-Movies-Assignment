@@ -28,7 +28,7 @@ const UpdateMovieForm = (props) => {
         .catch((err) => {
           console.log(err);
         });
-    }, []);
+    }, [id]);
   
     const onChange = (e) => {
       let name = e.target.name;
