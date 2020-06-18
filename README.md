@@ -26,7 +26,6 @@ Movie object format:
   metascore: 89,
   stars: ['Kurt Russell', 'Bill Paxton', 'Sam Elliot'],
 }
-```
 
 ### Part 2 - Deleting A Movie:
 
