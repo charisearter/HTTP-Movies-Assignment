@@ -1,14 +1,15 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useParams, useHistory } from 'react-router-dom';
 import Axios from 'axios';
 
-class MovieForm extends Component {
-  state= {
+const initialValues = {
+
     id:'',
     title:'',
     director:'',
-    metascore: 0,
+    metascore: '',
     stars:[]
-  }
+  
 };
 
 //add stars function to add actors/actresses
@@ -24,9 +25,22 @@ inputChange = e => {
   this.setState({ [e.target.name]: e.target.value })
 };
 
+// addMovie = () => {
+//   const { stars, title, metaScore, director } = this.state;
+//   const newMovie= { stars, title, metaScore, director };
+//   const saveMovie = axios
+//   .post('http://localhost:/api/movies', newMovie)
+//   .then(res => {
+//     this.props.history.push('/')
+//   })
+//   .catch(err => {
+//     console.log(err.response.message)
+//   })
+// }
+const UpdateMovieForm = (props) => {
 
 
-render() {
+
   return(
     <div>
       <input 
@@ -62,7 +76,7 @@ render() {
       />
 
       <button onClick={this.addStars}> Add Actor / Actress to List </button>
- 
+      {/* <button onClick={this.addMovie}> Save Movie </button> */}
       {this.state.stars.map(actor => {
         return <div> {actor} </div>; 
       })}
@@ -71,4 +85,4 @@ render() {
   )
 }
 
-export default MovieForm;
+export default UpdateMovieForm;
