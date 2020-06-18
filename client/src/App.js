@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Fragment } from "react";
 import { Route } from "react-router-dom";
 import SavedList from "./Movies/SavedList";
 import MovieList from "./Movies/MovieList";
@@ -7,11 +7,11 @@ import axios from 'axios';
 import UpdateMovieForm from "./Movies/UpdateMovieForm";
 
 const App = () => {
-  const [savedList, setSavedList] = useState([]);
-  const [movieList, setMovieList] = useState([]);
-  const [refresh, setRefresh] = useState(true)
+  const [savedList, setSavedList] = useState([]);//for saved list
+  const [movieList, setMovieList] = useState([]);//for movie list
+  const [refresh, setRefresh] = useState(true) //refrsh 
 
-  const getMovieList = () => {
+  const getMovieList = () => {//display movie list
     axios
       .get("http://localhost:5000/api/movies")
       .then(res => setMovieList(res.data))
@@ -21,17 +21,17 @@ const App = () => {
       })
   };
 
-  const addToSavedList = movie => {
+  const addToSavedList = movie => { //add to save
     setSavedList([...savedList, movie]);
   };
 
-  useEffect(() => {
+  useEffect(() => {//display the movie list
     getMovieList();
   }, [refresh]);
 
   return (
-    <>
-      <SavedList list={savedList} />
+    <Fragment>
+      <SavedList list={savedList} /> 
 
       <Route exact path="/">
         <MovieList movies={movieList} />
@@ -44,7 +44,7 @@ const App = () => {
       <Route path="/update-movies/:id">
         <UpdateMovieForm setMovieList={setMovieList} setRefresh={setRefresh} />
       </Route>
-    </>
+    </Fragment>
   );
 };
 
