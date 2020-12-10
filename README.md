@@ -10,14 +10,16 @@
 # -- You don't have to do npm audit fix, but I do just in case. I don't go further than that.
 [x]- Still inside the `client` folder run `npm start` to run the client application.
 [x]- Make your own branch and push it up to git ( Need to make new terminal for this. )
+# -- Don't forget to commit before you push
+# -- Make sure it actually pushes up to get and shows, check for the commit message you wrote 
 
 ### Part 1 - Updating A Movie:
 
-- Add a route at the path `/update-movie/:id`
-- Create a component with a form to update the chosen movie
-- Add a button in the movie component that routes you to your new route with the movies's id as the URL param
-- The form should make a PUT request to the server when submitted
-- When the call comes back successfully, reset your form state and route the user to `/movies` where they will see the updated movie in the list
+[x]- Add a route at the path `/update-movie/:id`
+[]- Create a component with a form to update the chosen movie
+[x]- Add a button in the movie component that routes you to your new route with the movies's id as the URL param
+[x]- The form should make a PUT request to the server when submitted
+[x]- When the call comes back successfully, reset your form state and route the user to `/movies` where they will see the updated movie in the list
 
 Movie object format:
 
@@ -33,10 +35,10 @@ Movie object format:
 
 ### Part 2 - Deleting A Movie:
 
-- Add a delete button in the movie component that makes a DELETE request
-- When the call comes back successfully, route the user to `/movies` where they will see the updated movie list without the deleted movie
+[x]- Add a delete button in the movie component that makes a DELETE request
+[x]- When the call comes back successfully, route the user to `/movies` where they will see the updated movie list without the deleted movie
 
-### Part 3 (Stretch) - Adding A Movie:
+### Part 3 (Stretch) - Adding A Movie: Do this on your own
 
 - Add a route at the path `/add-movie`
 - Create a component with a form to add a new movie
