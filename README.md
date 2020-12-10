@@ -1,12 +1,15 @@
 # HTTP Movies
+# -- Okay, 3rd time is a charm. It turns out that the errors that happened before are because the codebase changed, so my previous version - old code base (that worked on my MAC) won't work on my PC. So there are a few slight changes. Easy enough. Let's start.
 
 ## Instructions
 
 - **Fork** this repository, then clone your fork.
-- Run `npm install` to download dependencies.
-- Run the server using `npm start`.
-- In a separate terminal cd into the `client` folder and run `npm install` to download dependencies.
-- Still inside the `client` folder run `npm start` to run the client application.
+[x]- Run `npm install` to download dependencies.
+[x]- Run the server using `npm start`.
+[x]- In a separate terminal cd into the `client` folder and run `npm install` to download dependencies.
+# -- You don't have to do npm audit fix, but I do just in case. I don't go further than that.
+[x]- Still inside the `client` folder run `npm start` to run the client application.
+[x]- Make your own branch and push it up to git ( Need to make new terminal for this. )
 
 ### Part 1 - Updating A Movie:
 
